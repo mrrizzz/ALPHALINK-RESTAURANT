@@ -18,8 +18,10 @@ void pesanMakanan()
         {18, "Bebek Goreng", 32000},
         {19, "Mujaer Bakar", 50000}};
     int batasAwal = 10, batasAkhir = 20;
+    int total = totalMakanan;
     int sizeMakanan = sizeof(makanan) / sizeof(makanan[0]);
-    displayMenu(makanan, sizeMakanan, totalMakanan, notaMakanan, batasAwal, batasAkhir);
+    displayMenu(makanan, sizeMakanan, &total, notaMakanan, batasAwal, batasAkhir);
+    totalMakanan = total;
 }
 void pesanMinuman()
 {
@@ -36,8 +38,10 @@ void pesanMinuman()
         {29, "Air Putih", 50000}};
     int batasAwal = 20;
     int batasAkhir = 30;
+    int total = totalMinuman;
     int sizeMinuman = sizeof(Minuman) / sizeof(Minuman[0]);
-    displayMenu(Minuman, sizeMinuman, totalMinuman, notaMinuman, batasAwal, batasAkhir);
+    displayMenu(Minuman, sizeMinuman, &total, notaMinuman, batasAwal, batasAkhir);
+    totalMinuman = total;
 }
 void tampilkanKeranjang()
 {
@@ -49,7 +53,6 @@ void tampilkanKeranjang()
     displayNota();
     keluar();
 }
-
 void checkout(int *cont)
 {
     printGarisDouble();
@@ -70,13 +73,11 @@ void checkout(int *cont)
     }
     hargaAkhir = overallPrice + pajak - discount;
     printf("\t\t\t\t\tTotal Bayar \tRp.  %d.00\n\n", hargaAkhir);
-
     int ketik;
     printf("Ketik 1 untuk bayar atau 0 untuk keluar : ");
     scanf("%d", &ketik);
     if (ketik == 1)
     {
-
         printf("\nMasukkan uang anda : Rp.  ");
         int bayar, kembalian;
         scanf("%d", &bayar);
@@ -84,7 +85,7 @@ void checkout(int *cont)
         if (bayar > hargaAkhir)
         {
             kembalian = bayar - hargaAkhir;
-            printf("Kembalian anda : Rp.  %d\n", kembalian);
+            printf("Kembalian anda : \tRp.  %d\n", kembalian);
         }
         else if (bayar < hargaAkhir)
         {
@@ -92,13 +93,18 @@ void checkout(int *cont)
             int tambal;
             while (kurang)
             {
-                printf("Uang anda kurang = %d\n", hargaAkhir - bayar);
-                printf("Lengkapi kekurangan anda : ");
+                printf("Uang anda kurang = \tRp. %d\n", hargaAkhir - bayar);
+                printf("Lengkapi kekurangan anda : \tRp. ");
                 scanf("%d", &tambal);
                 bayar += tambal;
                 if (bayar >= hargaAkhir)
                 {
                     kurang = false;
+                    if (bayar > hargaAkhir)
+                    {
+                        kembalian = bayar - hargaAkhir;
+                        printf("Kembalian anda : \tRp.  %d\n", kembalian);
+                    }
                     break;
                 }
             }

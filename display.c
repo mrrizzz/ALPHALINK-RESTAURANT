@@ -29,7 +29,7 @@ void printGarisDouble()
 }
 void displayPilihan()
 {
-    printf("\t\t\tALPHALINK RESTAURANT\n\n");
+    printf("\t\t\tRESTOO\n\n");
     printf("Pilih Menu\n");
     printf("1. Pesan Makanan\n");
     printf("2. Pesan Minuman\n");
@@ -37,9 +37,9 @@ void displayPilihan()
     printf("4. Checkout\n");
     printf("0. Keluar\n");
 }
-void displayMenu(struct menu *jenis, int size, int total, struct nota *nota, int batas1, int batas2)
+void displayMenu(struct menu *jenis, int size, int *total, struct nota *nota, int batas1, int batas2)
 {
-    printf("\t\tALPHALINK RESTAURANT\n\n");
+    printf("\t\tRESTOO\n\n");
     printf("DAFTAR HARGA : \n");
     printGaris();
     printf("KODE\tNAMA MENU\t\tHARGA\n");
@@ -68,14 +68,14 @@ void displayMenu(struct menu *jenis, int size, int total, struct nota *nota, int
             {
                 if (pilihan[pilihanKe] == jenis[i].kode)
                 {
-                    strcpy(nota[total].jenis, jenis[i].nama);
-                    nota[total].harga_satuan = jenis[i].harga;
-                    nota[total].qty = jumlah;
-                    nota[total].jumlah_harga = nota[total].harga_satuan * nota[total].qty;
+                    strcpy(nota[(*total)].jenis, jenis[i].nama);
+                    nota[(*total)].harga_satuan = jenis[i].harga;
+                    nota[(*total)].qty = jumlah;
+                    nota[(*total)].jumlah_harga = nota[(*total)].harga_satuan * nota[(*total)].qty;
                     printf("Pesanan %s (Rp.%d.00 x %d) berhasil ditambahkan.\n\n",
-                           nota[total].jenis, nota[total].harga_satuan, nota[total].qty);
-                    overallPrice += nota[total].jumlah_harga;
-                    total++;
+                           nota[(*total)].jenis, nota[(*total)].harga_satuan, nota[(*total)].qty);
+                    overallPrice += nota[(*total)].jumlah_harga;
+                    (*total)++;
                     pilihanKe++;
                 }
             }

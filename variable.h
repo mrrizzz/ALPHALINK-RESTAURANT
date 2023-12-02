@@ -24,7 +24,7 @@ extern int totalMakanan, totalMinuman, overallPrice;
 
 void pesanMakanan();
 void pesanMinuman();
-void displayMenu();
+void displayMenu(struct menu *jenis, int size, int *total, struct nota *nota, int batas1, int batas2);
 void tampilkanKeranjang();
 void displayPilihan();
 void checkout(int *cont);
